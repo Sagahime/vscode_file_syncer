@@ -27,12 +27,29 @@ export class HistoryStorage {
   private constructor() {
     const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
     if (!workspaceFolder) {
-      throw new Error('No workspace folder');
+      // 延迟初始化，使用临时目录
+      this.historyDir = '';
+      this.indexPath = '';
+      this.index = { entries: [] };
+      return;
     }
     this.historyDir = path.join(workspaceFolder.uri.fsPath, '.vscode', 'filesyncer', 'history');
     this.indexPath = path.join(this.historyDir, 'index.json');
     this.index = this.loadIndex();
     this.ensureHistoryDir();
+  }
+
+  private ensureInitialized(): void {
+    if (!this.historyDir) {
+      const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+      if (!workspaceFolder) {
+        throw new Error('No workspace folder');
+      }
+      this.historyDir = path.join(workspaceFolder.uri.fsPath, '.vscode', 'filesyncer', 'history');
+      this.indexPath = path.join(this.historyDir, 'index.json');
+      this.index = this.loadIndex();
+      this.ensureHistoryDir();
+    }
   }
 
   static getInstance(): HistoryStorage {
