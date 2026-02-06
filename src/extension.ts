@@ -9,6 +9,7 @@ import { SyncScheduler } from './sync/syncScheduler';
 import { DiffViewer } from './diff/diffViewer';
 import { HistoryManager } from './history/historyManager';
 import { RollbackManager } from './history/rollbackManager';
+import { PathUtils } from './utils/pathUtils';
 
 let sftpManager: SFTPManager;
 let configManager: ConfigManager;
@@ -159,7 +160,7 @@ export function activate(context: vscode.ExtensionContext) {
         return;
       }
       const localPath = editor.document.uri.fsPath;
-      const remotePath = require('./utils/pathUtils').PathUtils.getRemotePath(
+      const remotePath = PathUtils.getRemotePath(
         localPath,
         vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '',
         activeProfile.remotePath
@@ -210,7 +211,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.window.showInformationMessage('No active server profile');
         return;
       }
-      const remotePath = require('./utils/pathUtils').PathUtils.getRemotePath(
+      const remotePath = PathUtils.getRemotePath(
         localPath,
         vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '',
         activeProfile.remotePath
