@@ -1,0 +1,302 @@
+{
+  "name": "filesyncer",
+  "displayName": "FileSyncer - SFTP Deployment",
+  "description": "Sync files with remote servers via SFTP, similar to PyCharm's deployment feature",
+  "version": "0.1.0",
+  "publisher": "your-publisher-name",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:filesyncer.openConfig",
+    "onCommand:filesyncer.connect",
+    "onView:remoteFilesExplorer"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "filesyncer.connect",
+        "title": "Connect to Server",
+        "category": "FileSyncer"
+      },
+      {
+        "command": "filesyncer.disconnect",
+        "title": "Disconnect from Server",
+        "category": "FileSyncer"
+      },
+      {
+        "command": "filesyncer.switchProfile",
+        "title": "Switch Server Profile",
+        "category": "FileSyncer"
+      },
+      {
+        "command": "filesyncer.download",
+        "title": "Download from Remote",
+        "category": "FileSyncer",
+        "icon": "$(arrow-down)"
+      },
+      {
+        "command": "filesyncer.upload",
+        "title": "Upload to Remote",
+        "category": "FileSyncer",
+        "icon": "$(arrow-up)"
+      },
+      {
+        "command": "filesyncer.compare",
+        "title": "Compare with Remote",
+        "category": "FileSyncer",
+        "icon": "$(diff)"
+      },
+      {
+        "command": "filesyncer.sync",
+        "title": "Sync All Changes",
+        "category": "FileSyncer",
+        "icon": "$(sync)"
+      },
+      {
+        "command": "filesyncer.refresh",
+        "title": "Refresh Remote Files",
+        "category": "FileSyncer",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "filesyncer.showHistory",
+        "title": "Show File History",
+        "category": "FileSyncer",
+        "icon": "$(history)"
+      },
+      {
+        "command": "filesyncer.rollback",
+        "title": "Rollback to Version",
+        "category": "FileSyncer"
+      },
+      {
+        "command": "filesyncer.openFile",
+        "title": "Open File",
+        "category": "FileSyncer"
+      },
+      {
+        "command": "filesyncer.createRemoteDirectory",
+        "title": "Create Directory",
+        "category": "FileSyncer",
+        "icon": "$(new-folder)"
+      },
+      {
+        "command": "filesyncer.deleteRemote",
+        "title": "Delete",
+        "category": "FileSyncer",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "filesyncer.renameRemote",
+        "title": "Rename",
+        "category": "FileSyncer"
+      },
+      {
+        "command": "filesyncer.openConfig",
+        "title": "Open Server Configuration",
+        "category": "FileSyncer",
+        "icon": "$(settings-gear)"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "remoteFilesExplorer",
+          "name": "Remote Files"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "filesyncer.connect",
+          "when": "view == remoteFilesExplorer",
+          "group": "navigation@1"
+        },
+        {
+          "command": "filesyncer.disconnect",
+          "when": "view == remoteFilesExplorer",
+          "group": "navigation@2"
+        },
+        {
+          "command": "filesyncer.switchProfile",
+          "when": "view == remoteFilesExplorer",
+          "group": "navigation@3"
+        },
+        {
+          "command": "filesyncer.refresh",
+          "when": "view == remoteFilesExplorer",
+          "group": "navigation@4"
+        },
+        {
+          "command": "filesyncer.openConfig",
+          "when": "view == remoteFilesExplorer",
+          "group": "navigation@5"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "filesyncer.createRemoteDirectory",
+          "when": "view == remoteFilesExplorer",
+          "group": "remote@1"
+        },
+        {
+          "command": "filesyncer.renameRemote",
+          "when": "view == remoteFilesExplorer",
+          "group": "remote@2"
+        },
+        {
+          "command": "filesyncer.deleteRemote",
+          "when": "view == remoteFilesExplorer",
+          "group": "remote@3"
+        },
+        {
+          "separator": true,
+          "when": "view == remoteFilesExplorer",
+          "group": "remote@4"
+        },
+        {
+          "command": "filesyncer.download",
+          "when": "view == remoteFilesExplorer",
+          "group": "inline@1"
+        },
+        {
+          "command": "filesyncer.upload",
+          "when": "view == remoteFilesExplorer",
+          "group": "inline@2"
+        },
+        {
+          "command": "filesyncer.compare",
+          "when": "view == remoteFilesExplorer",
+          "group": "inline@3"
+        },
+        {
+          "command": "filesyncer.showHistory",
+          "when": "view == remoteFilesExplorer",
+          "group": "inline@4"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "FileSyncer",
+      "properties": {
+        "filesyncer.profiles": {
+          "type": "array",
+          "default": [],
+          "description": "Server connection profiles",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "host",
+              "username",
+              "remotePath"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Profile name"
+              },
+              "host": {
+                "type": "string",
+                "description": "Server hostname or IP"
+              },
+              "port": {
+                "type": "number",
+                "default": 22,
+                "description": "SSH port"
+              },
+              "username": {
+                "type": "string",
+                "description": "SSH username"
+              },
+              "password": {
+                "type": "string",
+                "description": "SSH password (not recommended, use privateKey instead)"
+              },
+              "privateKeyPath": {
+                "type": "string",
+                "description": "Path to private SSH key"
+              },
+              "passphrase": {
+                "type": "string",
+                "description": "Passphrase for private key"
+              },
+              "remotePath": {
+                "type": "string",
+                "description": "Remote directory path"
+              },
+              "exclude": {
+                "type": "array",
+                "default": [
+                  "node_modules/**",
+                  ".git/**",
+                  "*.log"
+                ],
+                "description": "File patterns to exclude from sync"
+              }
+            }
+          }
+        },
+        "filesyncer.activeProfile": {
+          "type": "string",
+          "default": "",
+          "description": "Active server profile name"
+        },
+        "filesyncer.autoUpload": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically upload files on save"
+        },
+        "filesyncer.autoUploadDelay": {
+          "type": "number",
+          "default": 1000,
+          "description": "Delay in milliseconds before auto-upload (debounce)"
+        },
+        "filesyncer.maxHistoryVersions": {
+          "type": "number",
+          "default": 10,
+          "description": "Maximum number of history versions to keep per file"
+        },
+        "filesyncer.historyMaxAgeDays": {
+          "type": "number",
+          "default": 30,
+          "description": "Maximum age of history versions in days"
+        },
+        "filesyncer.confirmBeforeOverwrite": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show confirmation dialog before overwriting files"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/minimatch": "^5.1.2",
+    "@types/node": "^18.x",
+    "@types/ssh2-sftp-client": "^9.0.6",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "minimatch": "^9.0.3",
+    "ssh2-sftp-client": "^9.1.0"
+  }
+}
