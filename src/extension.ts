@@ -22,19 +22,44 @@ let rollbackManager: RollbackManager;
 let remoteFileProvider: RemoteFileProvider;
 
 export function activate(context: vscode.ExtensionContext) {
-  console.log('FileSyncer is now active!');
+  try {
+    console.log('FileSyncer is now active!');
 
-  sftpManager = SFTPManager.getInstance();
-  configManager = ConfigManager.getInstance();
-  configEditorProvider = ConfigEditorProvider.getInstance();
-  syncManager = SyncManager.getInstance();
-  syncScheduler = SyncScheduler.getInstance();
-  diffViewer = new DiffViewer();
-  historyManager = HistoryManager.getInstance();
-  rollbackManager = RollbackManager.getInstance();
+    console.log('Initializing managers...');
+    sftpManager = SFTPManager.getInstance();
+    console.log('SFTPManager initialized');
 
-  remoteFileProvider = new RemoteFileProvider();
-  vscode.window.registerTreeDataProvider('remoteFilesExplorer', remoteFileProvider);
+    configManager = ConfigManager.getInstance();
+    console.log('ConfigManager initialized');
+
+    configEditorProvider = ConfigEditorProvider.getInstance();
+    console.log('ConfigEditorProvider initialized');
+
+    syncManager = SyncManager.getInstance();
+    console.log('SyncManager initialized');
+
+    syncScheduler = SyncScheduler.getInstance();
+    console.log('SyncScheduler initialized');
+
+    diffViewer = new DiffViewer();
+    console.log('DiffViewer initialized');
+
+    historyManager = HistoryManager.getInstance();
+    console.log('HistoryManager initialized');
+
+    rollbackManager = RollbackManager.getInstance();
+    console.log('RollbackManager initialized');
+
+    remoteFileProvider = new RemoteFileProvider();
+    console.log('RemoteFileProvider initialized');
+
+    vscode.window.registerTreeDataProvider('remoteFilesExplorer', remoteFileProvider);
+    console.log('TreeDataProvider registered');
+  } catch (error) {
+    console.error('Error during initialization:', error);
+    vscode.window.showErrorMessage(`FileSyncer initialization failed: ${error}`);
+    throw error;
+  }
 
   const openConfigDisposable = vscode.commands.registerCommand('filesyncer.openConfig', () => {
     console.log('Opening config editor...');
@@ -342,7 +367,7 @@ export function activate(context: vscode.ExtensionContext) {
     }
   });
 
-  vscode.workspace.onDidSaveTextDocument(document => {
+  const saveListener = vscode.workspace.onDidSaveTextDocument(document => {
     syncScheduler.scheduleUpload(document);
   });
 
@@ -350,7 +375,8 @@ export function activate(context: vscode.ExtensionContext) {
     sftpManager,
     configManager,
     historyManager,
-    syncScheduler
+    syncScheduler,
+    saveListener
   );
 }
 
