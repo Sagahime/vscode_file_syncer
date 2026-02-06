@@ -3,7 +3,14 @@
   "displayName": "FileSyncer - SFTP Deployment",
   "description": "Sync files with remote servers via SFTP, similar to PyCharm's deployment feature",
   "version": "0.1.0",
-  "publisher": "your-publisher-name",
+  "publisher": "Sagahime",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sagahime/vscode_file_syncer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Sagahime/vscode_file_syncer/issues"
+  },
   "engines": {
     "vscode": "^1.85.0"
   },
