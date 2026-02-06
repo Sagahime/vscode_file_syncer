@@ -13,7 +13,6 @@ vsc-extension-quickstart.md
 **/.eslintrc.json
 **/*.map
 **/*.ts
-node_modules/**
 .git/**
 .DS_Store
 *.vsix
