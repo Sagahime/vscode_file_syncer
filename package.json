@@ -2,7 +2,7 @@
   "name": "filesyncer",
   "displayName": "FileSyncer - SFTP Deployment",
   "description": "Sync files with remote servers via SFTP, similar to PyCharm's deployment feature",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "publisher": "Sagahime",
   "repository": {
     "type": "git",
@@ -149,6 +149,31 @@
       ],
       "view/item/context": [
         {
+          "command": "filesyncer.download",
+          "when": "view == remoteFilesExplorer",
+          "group": "inline@1"
+        },
+        {
+          "command": "filesyncer.upload",
+          "when": "view == remoteFilesExplorer",
+          "group": "inline@2"
+        },
+        {
+          "command": "filesyncer.compare",
+          "when": "view == remoteFilesExplorer",
+          "group": "inline@3"
+        },
+        {
+          "command": "filesyncer.showHistory",
+          "when": "view == remoteFilesExplorer",
+          "group": "inline@4"
+        },
+        {
+          "separator": true,
+          "when": "view == remoteFilesExplorer",
+          "group": "inline"
+        },
+        {
           "command": "filesyncer.createRemoteDirectory",
           "when": "view == remoteFilesExplorer",
           "group": "remote@1"
@@ -169,61 +194,14 @@
           "group": "remote@4"
         },
         {
-          "command": "filesyncer.download",
-          "when": "view == remoteFilesExplorer",
-          "group": "sync@1"
-        },
-        {
-          "command": "filesyncer.upload",
-          "when": "view == remoteFilesExplorer",
-          "group": "sync@2"
-        },
-        {
-          "command": "filesyncer.compare",
-          "when": "view == remoteFilesExplorer",
-          "group": "sync@3"
-        },
-        {
-          "separator": true,
-          "when": "view == remoteFilesExplorer",
-          "group": "sync@4"
-        },
-        {
-          "command": "filesyncer.showHistory",
+          "command": "filesyncer.rollback",
           "when": "view == remoteFilesExplorer",
           "group": "history@1"
         },
         {
-          "command": "filesyncer.rollback",
-          "when": "view == remoteFilesExplorer",
-          "group": "history@2"
-        },
-        {
           "command": "filesyncer.openFile",
           "when": "view == remoteFilesExplorer",
-          "group": "history@3"
-        }
-      ],
-      "view/item/mergemid": [
-        {
-          "command": "filesyncer.download",
-          "when": "view == remoteFilesExplorer",
-          "group": "inline@1"
-        },
-        {
-          "command": "filesyncer.upload",
-          "when": "view == remoteFilesExplorer",
-          "group": "inline@2"
-        },
-        {
-          "command": "filesyncer.compare",
-          "when": "view == remoteFilesExplorer",
-          "group": "inline@3"
-        },
-        {
-          "command": "filesyncer.showHistory",
-          "when": "view == remoteFilesExplorer",
-          "group": "inline@4"
+          "group": "history@2"
         }
       ]
     },

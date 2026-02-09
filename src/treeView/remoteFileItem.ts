@@ -25,7 +25,8 @@ export class RemoteFileItem extends vscode.TreeItem {
     this.tooltip = `${remotePath}\n${localPath}`;
     this.description = message ? '' : this.getStatusDescription();
     this.iconPath = message ? new vscode.ThemeIcon('warning') : this.getIcon();
-    this.contextValue = `${type}-${syncStatus}${message ? '-message' : ''}`;
+    // Set a simple contextValue for menu matching
+    this.contextValue = message ? 'message-item' : (type === 'folder' ? 'folder' : 'file');
   }
 
   private getIcon(): vscode.ThemeIcon {
