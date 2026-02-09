@@ -171,22 +171,37 @@
         {
           "command": "filesyncer.download",
           "when": "view == remoteFilesExplorer",
-          "group": "inline@1"
+          "group": "sync@1"
         },
         {
           "command": "filesyncer.upload",
           "when": "view == remoteFilesExplorer",
-          "group": "inline@2"
+          "group": "sync@2"
         },
         {
           "command": "filesyncer.compare",
           "when": "view == remoteFilesExplorer",
-          "group": "inline@3"
+          "group": "sync@3"
+        },
+        {
+          "separator": true,
+          "when": "view == remoteFilesExplorer",
+          "group": "sync@4"
         },
         {
           "command": "filesyncer.showHistory",
           "when": "view == remoteFilesExplorer",
-          "group": "inline@4"
+          "group": "history@1"
+        },
+        {
+          "command": "filesyncer.rollback",
+          "when": "view == remoteFilesExplorer",
+          "group": "history@2"
+        },
+        {
+          "command": "filesyncer.openFile",
+          "when": "view == remoteFilesExplorer",
+          "group": "history@3"
         }
       ]
     },

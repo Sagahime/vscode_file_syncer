@@ -15,6 +15,9 @@ export class RemoteFileItem extends vscode.TreeItem {
   ) {
     super(path.basename(remotePath) || remotePath, collapsibleState);
 
+    // Set a unique ID for the tree item (required for inline buttons)
+    this.id = remotePath;
+
     if (message) {
       this.label = message;
     }
