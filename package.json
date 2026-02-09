@@ -2,7 +2,7 @@
   "name": "filesyncer",
   "displayName": "FileSyncer - SFTP Deployment",
   "description": "Sync files with remote servers via SFTP, similar to PyCharm's deployment feature",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "publisher": "Sagahime",
   "repository": {
     "type": "git",
@@ -150,58 +150,47 @@
       "view/item/context": [
         {
           "command": "filesyncer.download",
-          "when": "view == remoteFilesExplorer",
-          "group": "inline@1"
+          "when": "view == remoteFilesExplorer"
         },
         {
           "command": "filesyncer.upload",
-          "when": "view == remoteFilesExplorer",
-          "group": "inline@2"
+          "when": "view == remoteFilesExplorer"
         },
         {
           "command": "filesyncer.compare",
-          "when": "view == remoteFilesExplorer",
-          "group": "inline@3"
+          "when": "view == remoteFilesExplorer"
         },
         {
           "command": "filesyncer.showHistory",
-          "when": "view == remoteFilesExplorer",
-          "group": "inline@4"
+          "when": "view == remoteFilesExplorer"
         },
         {
           "separator": true,
-          "when": "view == remoteFilesExplorer",
-          "group": "inline"
+          "when": "view == remoteFilesExplorer"
         },
         {
           "command": "filesyncer.createRemoteDirectory",
-          "when": "view == remoteFilesExplorer",
-          "group": "remote@1"
+          "when": "view == remoteFilesExplorer"
         },
         {
           "command": "filesyncer.renameRemote",
-          "when": "view == remoteFilesExplorer",
-          "group": "remote@2"
+          "when": "view == remoteFilesExplorer"
         },
         {
           "command": "filesyncer.deleteRemote",
-          "when": "view == remoteFilesExplorer",
-          "group": "remote@3"
+          "when": "view == remoteFilesExplorer"
         },
         {
           "separator": true,
-          "when": "view == remoteFilesExplorer",
-          "group": "remote@4"
+          "when": "view == remoteFilesExplorer"
         },
         {
           "command": "filesyncer.rollback",
-          "when": "view == remoteFilesExplorer",
-          "group": "history@1"
+          "when": "view == remoteFilesExplorer"
         },
         {
           "command": "filesyncer.openFile",
-          "when": "view == remoteFilesExplorer",
-          "group": "history@2"
+          "when": "view == remoteFilesExplorer"
         }
       ]
     },
