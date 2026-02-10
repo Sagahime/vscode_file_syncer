@@ -2,7 +2,7 @@
   "name": "filesyncer",
   "displayName": "FileSyncer - SFTP Deployment",
   "description": "Sync files with remote servers via SFTP, similar to PyCharm's deployment feature",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "publisher": "Sagahime",
   "repository": {
     "type": "git",
@@ -165,10 +165,6 @@
           "when": "view == remoteFilesExplorer"
         },
         {
-          "separator": true,
-          "when": "view == remoteFilesExplorer"
-        },
-        {
           "command": "filesyncer.createRemoteDirectory",
           "when": "view == remoteFilesExplorer"
         },
@@ -178,10 +174,6 @@
         },
         {
           "command": "filesyncer.deleteRemote",
-          "when": "view == remoteFilesExplorer"
-        },
-        {
-          "separator": true,
           "when": "view == remoteFilesExplorer"
         },
         {
